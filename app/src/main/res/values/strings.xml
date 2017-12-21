@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">PartyApplication</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Log In</string>
+    <string name="server">Server</string>
+    <string name="distance">Distance</string>
+    <string name="distance_format" formatted="false">%d km</string>
+    <string name="fetching_list">Fetching the list...</string>
+    <string name="error_fill_fields">Fill all fields</string>
+    <string name="error_no_internet">No internet connection</string>
+</resources>
