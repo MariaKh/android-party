@@ -13,19 +13,12 @@ import android.net.NetworkInfo;
  * Utils for checking network connection
  */
 public class NetworkUtils {
-    /**
-     * @param context
-     * @return is device connect to the internet
-     */
+
     public static boolean isOnline(Context context) {
         final NetworkInfo networkInfo = getNetworkInfo(context);
         return networkInfo != null && networkInfo.isConnected();
     }
 
-    /**
-     * @param context
-     * @return information about network
-     */
     private static NetworkInfo getNetworkInfo(Context context) {
         if (context == null)
             return null;

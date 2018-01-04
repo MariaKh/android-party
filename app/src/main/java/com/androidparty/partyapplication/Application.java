@@ -9,7 +9,6 @@ import android.content.Context;
 public class Application extends android.app.Application {
 
     private static ApplicationComponent appComponent;
-    private static final String TAG = Application.class.getName();
 
     @Override
     public void onCreate() {
@@ -18,11 +17,6 @@ public class Application extends android.app.Application {
                 .applicationModule(new ApplicationModule(this))
                 .build();
         appComponent.inject(this);
-    }
-
-    @Override
-    protected void attachBaseContext(Context base) {
-        super.attachBaseContext(base);
     }
 
     public static ApplicationComponent getAppComponent() {

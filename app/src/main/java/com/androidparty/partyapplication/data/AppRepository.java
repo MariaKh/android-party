@@ -1,6 +1,9 @@
 package com.androidparty.partyapplication.data;
 
+import android.util.Log;
+
 import com.androidparty.partyapplication.data.dao.ContentDao;
+import com.androidparty.partyapplication.network.ApiToDbMapper;
 import com.androidparty.partyapplication.network.AppRemoteApi;
 import com.androidparty.partyapplication.network.entities.request.LoginRequest;
 import com.androidparty.partyapplication.network.entities.response.DataResponse;
@@ -39,11 +42,8 @@ public class AppRepository {
     public Single<List<DataResponse>> getList() {
         return userRemoteApi.getDataList()
                 .subscribeOn(Schedulers.io())
-                .map(resp -> resp)
-                .doOnSuccess((content) -> {
-                    if (content != null) {
-                        contentDao.insertContent(content);
-                    }
+                .doOnSuccess(response -> {
+                    contentDao.insertContent(ApiToDbMapper.map(response));
                 });
     }
 }

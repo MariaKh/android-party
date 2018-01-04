@@ -11,43 +11,31 @@ import com.google.gson.annotations.SerializedName;
 /**
  * Created by 1 on 12/20/2017.
  */
-@Entity(tableName = DataResponse.Table.TABLE_NAME)
 public class DataResponse {
     @SerializedName("name")
     @Expose
-    @ColumnInfo(name = DataResponse.Table.COLUMN_SERVER)
-    @NonNull
+
     @PrimaryKey
-    private String name;
+    private String mName;
     @SerializedName("distance")
     @Expose
-    @ColumnInfo(name = DataResponse.Table.COLUMN_DISTANCE)
-    @NonNull
-    private int distance;
+    private int mDistance;
 
     @NonNull
     public String getName() {
-        return name;
+        return mName;
     }
 
     public void setName(@NonNull String name) {
-        this.name = name;
+        this.mName = name;
     }
 
-    @NonNull
     public int getDistance() {
-        return distance;
+        return mDistance;
     }
 
-    public void setDistance(@NonNull int distance) {
-        this.distance = distance;
+    public void setDistance(int distance) {
+        this.mDistance = distance;
     }
 
-    public class Table {
-
-        public static final String TABLE_NAME = "content";
-
-        public static final String COLUMN_SERVER = "server";
-        public static final String COLUMN_DISTANCE = "distance";
-    }
 }

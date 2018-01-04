@@ -20,15 +20,15 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_logo"/>
+                android:src="@drawable/ic_logo" />
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/logout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:src="@drawable/ic_logout"
-                android:clickable="true"
+                android:background="@null"
                 />
 
         </RelativeLayout>

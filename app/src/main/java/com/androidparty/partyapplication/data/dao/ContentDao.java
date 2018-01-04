@@ -4,6 +4,7 @@ import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 
+import com.androidparty.partyapplication.data.model.Content;
 import com.androidparty.partyapplication.network.entities.response.DataResponse;
 
 import java.util.List;
@@ -18,11 +19,11 @@ import static android.arch.persistence.room.OnConflictStrategy.REPLACE;
 @Dao
 public interface ContentDao {
     @Insert(onConflict = REPLACE)
-    void insertContent(List<DataResponse> content);
+    void insertContent(List<Content> content);
 
-    @Query("SELECT * FROM " + DataResponse.Table.TABLE_NAME)
-    Flowable<List<DataResponse>> getContent();
+    @Query("SELECT * FROM " + Content.Table.TABLE_NAME)
+    Flowable<List<Content>> getContent();
 
-    @Query("DELETE FROM " + DataResponse.Table.TABLE_NAME)
+    @Query("DELETE FROM " + Content.Table.TABLE_NAME)
     void deleteTable();
 }

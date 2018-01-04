@@ -7,6 +7,8 @@ import com.androidparty.partyapplication.ui.activities.MainActivity;
 import com.androidparty.partyapplication.ui.activities.RegistrationActivity;
 import com.androidparty.partyapplication.ui.fragments.LoginFragment;
 import com.androidparty.partyapplication.ui.fragments.MainFragment;
+import com.androidparty.partyapplication.ui.presentation.presenters.ContentPresenter;
+import com.androidparty.partyapplication.ui.presentation.presenters.LoginPresenter;
 
 import javax.inject.Singleton;
 
@@ -20,11 +22,13 @@ import dagger.Component;
 public interface ApplicationComponent {
     void inject(Application application);
 
-    void inject(LoginFragment loginFragment);
-
     void inject(MainFragment mainFragment);
 
     void inject(RegistrationActivity registrationActivity);
 
     void inject(MainActivity mainActivity);
+
+    void inject(LoginPresenter loginPresenter);
+
+    void inject(ContentPresenter contentPresenter);
 }

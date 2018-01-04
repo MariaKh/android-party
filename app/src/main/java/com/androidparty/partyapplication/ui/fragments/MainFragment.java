@@ -10,33 +10,26 @@ import android.view.ViewGroup;
 
 import com.androidparty.partyapplication.Application;
 import com.androidparty.partyapplication.R;
-import com.androidparty.partyapplication.data.dao.ContentDao;
-import com.androidparty.partyapplication.network.entities.response.DataResponse;
-import com.androidparty.partyapplication.ui.SeparatorDecoration;
+import com.androidparty.partyapplication.data.model.Content;
 import com.androidparty.partyapplication.ui.adapters.ListAdapter;
+import com.androidparty.partyapplication.ui.presentation.contracts.ContentContract;
+import com.androidparty.partyapplication.ui.presentation.presenters.ContentPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
-
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by 1 on 12/20/2017.
  */
 
-public class MainFragment extends Fragment {
+public class MainFragment extends Fragment implements ContentContract.View{
 
     public static final String TAG = MainFragment.class.getName();
 
-    @Inject
-    ContentDao contentDao;
-    Disposable contentDbSubscription;
     private ListAdapter mAdapter;
     private RecyclerView mList;
+    private ContentContract.Presenter mPresenter;
 
 
     @Override
@@ -51,42 +44,31 @@ public class MainFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        if (mPresenter == null) mPresenter = new ContentPresenter();
+        setUpList();
+    }
+
+    private void setUpList(){
         mAdapter = new ListAdapter(getContext(), null);
         mList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         mList.setHasFixedSize(true);
-        mList.addItemDecoration(new SeparatorDecoration(getContext(), LinearLayoutManager.VERTICAL, 16));
         mList.setAdapter(mAdapter);
-
-
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        getContentFromDb();
+        mPresenter.attachView(this);
     }
 
     @Override
     public void onPause() {
-        if (contentDbSubscription != null) {
-            contentDbSubscription.dispose();
-        }
+        mPresenter.detachView(this);
         super.onPause();
     }
 
-    private void getContentFromDb() {
-        if (contentDbSubscription != null) {
-            contentDbSubscription.dispose();
-        }
-        contentDbSubscription = contentDao.getContent()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::updateContent, throwable -> {
-                    throw new RuntimeException(throwable);
-                });
-    }
-
-    private void updateContent(List<DataResponse> contents) {
-        mAdapter.updateData((ArrayList<DataResponse>) contents);
+    @Override
+    public void updateContent(List<Content> contents) {
+        mAdapter.updateData((ArrayList<Content>) contents);
     }
 }

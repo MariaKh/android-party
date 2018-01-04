@@ -29,6 +29,10 @@ public class RegistrationActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         setContentView(R.layout.activity_registration);
+        navigateToNextScreen();
+    }
+
+    private void navigateToNextScreen(){
         if (TextUtils.isEmpty(preferencesRepository.getToken())) {
             if (getSupportFragmentManager().findFragmentByTag(LoginFragment.TAG) == null) {
                 Fragment loginFragment = new LoginFragment();

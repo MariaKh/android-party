@@ -61,6 +61,7 @@
                 android:layout_weight="0.9"
                 android:background="@android:color/transparent"
                 android:gravity="center_vertical"
+                android:inputType="textNoSuggestions"
                 android:hint="@string/username" />
         </LinearLayout>
 
@@ -97,6 +98,7 @@
                 android:layout_weight="0.9"
                 android:background="@android:color/transparent"
                 android:gravity="center_vertical"
+                android:inputType="textPassword"
                 android:hint="@string/password" />
 
         </LinearLayout>

@@ -11,9 +11,9 @@ public class LoginResponse {
 
     @SerializedName("token")
     @Expose
-    private String token;
+    private String mToken;
 
     public String getToken() {
-        return token;
+        return mToken;
     }
 }
